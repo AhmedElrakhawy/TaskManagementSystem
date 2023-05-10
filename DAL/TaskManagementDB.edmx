@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TaskManagementDB.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="employee_Id" />
+          </Key>
+          <Property Name="employee_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="employee_Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="employee_Address" Type="nvarchar" MaxLength="100" />
+          <Property Name="employee_PhoneNumber" Type="nvarchar" MaxLength="100" />
+          <Property Name="employee_Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="employee_JoinDate" Type="nvarchar" MaxLength="100" />
+          <Property Name="employee_DateOfBirth" Type="nvarchar" MaxLength="100" />
+          <Property Name="employee_AuthenticationMode" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="project_Id" />
+          </Key>
+          <Property Name="project_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="project_Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="project_Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="project_StartTime" Type="datetime2" Precision="7" />
+          <Property Name="project_Status" Type="int" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="task_Id" />
+          </Key>
+          <Property Name="task_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="task_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="task_Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="task_StartDate" Type="datetime2" Precision="7" />
+          <Property Name="task_EndDate" Type="datetime2" Precision="7" />
+          <Property Name="task_Employee_Id" Type="int" />
+          <Property Name="task_Project_Id" Type="int" />
+          <Property Name="task_Status" Type="int" />
+        </EntityType>
+        <EntityType Name="tbUser">
+          <Key>
+            <PropertyRef Name="user_Id" />
+          </Key>
+          <Property Name="user_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_CreatedDate" Type="datetime2" Precision="7" />
+          <Property Name="user_Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="user_employee_Id" Type="int" />
+          <Property Name="user_AuthenticationMode" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK__Task__task_Emplo__1920BF5C">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="employee_Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="task_Employee_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Task__task_Proje__182C9B23">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="project_Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="task_Project_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbUser__user_emp__1367E606">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="tbUser" Type="Self.tbUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="employee_Id" />
+            </Principal>
+            <Dependent Role="tbUser">
+              <PropertyRef Name="user_employee_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TaskManagementDBStoreContainer">
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbUser" EntityType="Self.tbUser" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Task__task_Emplo__1920BF5C" Association="Self.FK__Task__task_Emplo__1920BF5C">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Task__task_Proje__182C9B23" Association="Self.FK__Task__task_Proje__182C9B23">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbUser__user_emp__1367E606" Association="Self.FK__tbUser__user_emp__1367E606">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="tbUser" EntitySet="tbUser" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TaskManagementDB" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="employee_Id" />
+          </Key>
+          <Property Name="employee_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="employee_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="employee_Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="employee_PhoneNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="employee_Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="employee_JoinDate" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="employee_DateOfBirth" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="employee_AuthenticationMode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK__Task__task_Emplo__1920BF5C" FromRole="Employee" ToRole="Task" />
+          <NavigationProperty Name="tbUsers" Relationship="Self.FK__tbUser__user_emp__1367E606" FromRole="Employee" ToRole="tbUser" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="project_Id" />
+          </Key>
+          <Property Name="project_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="project_Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="project_Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="project_StartTime" Type="DateTime" Precision="7" />
+          <Property Name="project_Status" Type="Int32" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK__Task__task_Proje__182C9B23" FromRole="Project" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="task_Id" />
+          </Key>
+          <Property Name="task_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="task_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="task_Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="task_StartDate" Type="DateTime" Precision="7" />
+          <Property Name="task_EndDate" Type="DateTime" Precision="7" />
+          <Property Name="task_Employee_Id" Type="Int32" />
+          <Property Name="task_Project_Id" Type="Int32" />
+          <Property Name="task_Status" Type="Int32" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Task__task_Emplo__1920BF5C" FromRole="Task" ToRole="Employee" />
+          <NavigationProperty Name="Project" Relationship="Self.FK__Task__task_Proje__182C9B23" FromRole="Task" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="tbUser">
+          <Key>
+            <PropertyRef Name="user_Id" />
+          </Key>
+          <Property Name="user_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_CreatedDate" Type="DateTime" Precision="7" />
+          <Property Name="user_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="user_employee_Id" Type="Int32" />
+          <Property Name="user_AuthenticationMode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__tbUser__user_emp__1367E606" FromRole="tbUser" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK__Task__task_Emplo__1920BF5C">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="employee_Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="task_Employee_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbUser__user_emp__1367E606">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="tbUser" Type="Self.tbUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="employee_Id" />
+            </Principal>
+            <Dependent Role="tbUser">
+              <PropertyRef Name="user_employee_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Task__task_Proje__182C9B23">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="project_Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="task_Project_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TaskManagementDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Projects" EntityType="Self.Project" />
+          <EntitySet Name="Tasks" EntityType="Self.Task" />
+          <EntitySet Name="tbUsers" EntityType="Self.tbUser" />
+          <AssociationSet Name="FK__Task__task_Emplo__1920BF5C" Association="Self.FK__Task__task_Emplo__1920BF5C">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbUser__user_emp__1367E606" Association="Self.FK__tbUser__user_emp__1367E606">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="tbUser" EntitySet="tbUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Task__task_Proje__182C9B23" Association="Self.FK__Task__task_Proje__182C9B23">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TaskManagementDBStoreContainer" CdmEntityContainer="TaskManagementDBEntities">
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="TaskManagementDB.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="employee_Id" ColumnName="employee_Id" />
+                <ScalarProperty Name="employee_Name" ColumnName="employee_Name" />
+                <ScalarProperty Name="employee_Address" ColumnName="employee_Address" />
+                <ScalarProperty Name="employee_PhoneNumber" ColumnName="employee_PhoneNumber" />
+                <ScalarProperty Name="employee_Email" ColumnName="employee_Email" />
+                <ScalarProperty Name="employee_JoinDate" ColumnName="employee_JoinDate" />
+                <ScalarProperty Name="employee_DateOfBirth" ColumnName="employee_DateOfBirth" />
+                <ScalarProperty Name="employee_AuthenticationMode" ColumnName="employee_AuthenticationMode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="TaskManagementDB.Project">
+              <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="project_Id" ColumnName="project_Id" />
+                <ScalarProperty Name="project_Title" ColumnName="project_Title" />
+                <ScalarProperty Name="project_Description" ColumnName="project_Description" />
+                <ScalarProperty Name="project_StartTime" ColumnName="project_StartTime" />
+                <ScalarProperty Name="project_Status" ColumnName="project_Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="TaskManagementDB.Task">
+              <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="task_Id" ColumnName="task_Id" />
+                <ScalarProperty Name="task_Name" ColumnName="task_Name" />
+                <ScalarProperty Name="task_Description" ColumnName="task_Description" />
+                <ScalarProperty Name="task_StartDate" ColumnName="task_StartDate" />
+                <ScalarProperty Name="task_EndDate" ColumnName="task_EndDate" />
+                <ScalarProperty Name="task_Employee_Id" ColumnName="task_Employee_Id" />
+                <ScalarProperty Name="task_Project_Id" ColumnName="task_Project_Id" />
+                <ScalarProperty Name="task_Status" ColumnName="task_Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbUsers">
+            <EntityTypeMapping TypeName="TaskManagementDB.tbUser">
+              <MappingFragment StoreEntitySet="tbUser">
+                <ScalarProperty Name="user_Id" ColumnName="user_Id" />
+                <ScalarProperty Name="user_CreatedDate" ColumnName="user_CreatedDate" />
+                <ScalarProperty Name="user_Password" ColumnName="user_Password" />
+                <ScalarProperty Name="user_employee_Id" ColumnName="user_employee_Id" />
+                <ScalarProperty Name="user_AuthenticationMode" ColumnName="user_AuthenticationMode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

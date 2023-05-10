@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33529.622
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PresentationLayer", "PresentationLayer\PresentationLayer.csproj", "{54A7C405-290C-4584-B18C-14FF0794F89B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{0F57C554-9CD0-41E1-AC4A-0FBB9EFFD1DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{82F54C3E-54C2-40B5-A7C1-5C941C8B2465}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{54A7C405-290C-4584-B18C-14FF0794F89B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54A7C405-290C-4584-B18C-14FF0794F89B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54A7C405-290C-4584-B18C-14FF0794F89B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54A7C405-290C-4584-B18C-14FF0794F89B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F57C554-9CD0-41E1-AC4A-0FBB9EFFD1DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F57C554-9CD0-41E1-AC4A-0FBB9EFFD1DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F57C554-9CD0-41E1-AC4A-0FBB9EFFD1DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F57C554-9CD0-41E1-AC4A-0FBB9EFFD1DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82F54C3E-54C2-40B5-A7C1-5C941C8B2465}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82F54C3E-54C2-40B5-A7C1-5C941C8B2465}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82F54C3E-54C2-40B5-A7C1-5C941C8B2465}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82F54C3E-54C2-40B5-A7C1-5C941C8B2465}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {040CFE64-9BB2-4B36-BBBB-4BBDA20EFEBC}
+	EndGlobalSection
+EndGlobal
